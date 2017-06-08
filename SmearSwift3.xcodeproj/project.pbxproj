@@ -1,0 +1,418 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		64544A361EE8D3CA00977C5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64544A351EE8D3CA00977C5E /* AppDelegate.swift */; };
+		64544A381EE8D3CA00977C5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64544A371EE8D3CA00977C5E /* ViewController.swift */; };
+		64544A3A1EE8D3CA00977C5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64544A391EE8D3CA00977C5E /* Assets.xcassets */; };
+		64544A3D1EE8D3CA00977C5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64544A3B1EE8D3CA00977C5E /* Main.storyboard */; };
+		64544A481EE8D3CA00977C5E /* SmearSwift3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64544A471EE8D3CA00977C5E /* SmearSwift3Tests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		64544A441EE8D3CA00977C5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 64544A2A1EE8D3CA00977C5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64544A311EE8D3CA00977C5E;
+			remoteInfo = SmearSwift3;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		64544A321EE8D3CA00977C5E /* SmearSwift3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmearSwift3.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		64544A351EE8D3CA00977C5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		64544A371EE8D3CA00977C5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		64544A391EE8D3CA00977C5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		64544A3C1EE8D3CA00977C5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		64544A3E1EE8D3CA00977C5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64544A431EE8D3CA00977C5E /* SmearSwift3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmearSwift3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		64544A471EE8D3CA00977C5E /* SmearSwift3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmearSwift3Tests.swift; sourceTree = "<group>"; };
+		64544A491EE8D3CA00977C5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		64544A2F1EE8D3CA00977C5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64544A401EE8D3CA00977C5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		64544A291EE8D3CA00977C5E = {
+			isa = PBXGroup;
+			children = (
+				64544A341EE8D3CA00977C5E /* SmearSwift3 */,
+				64544A461EE8D3CA00977C5E /* SmearSwift3Tests */,
+				64544A331EE8D3CA00977C5E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		64544A331EE8D3CA00977C5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				64544A321EE8D3CA00977C5E /* SmearSwift3.app */,
+				64544A431EE8D3CA00977C5E /* SmearSwift3Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64544A341EE8D3CA00977C5E /* SmearSwift3 */ = {
+			isa = PBXGroup;
+			children = (
+				64544A351EE8D3CA00977C5E /* AppDelegate.swift */,
+				64544A371EE8D3CA00977C5E /* ViewController.swift */,
+				64544A391EE8D3CA00977C5E /* Assets.xcassets */,
+				64544A3B1EE8D3CA00977C5E /* Main.storyboard */,
+				64544A3E1EE8D3CA00977C5E /* Info.plist */,
+			);
+			path = SmearSwift3;
+			sourceTree = "<group>";
+		};
+		64544A461EE8D3CA00977C5E /* SmearSwift3Tests */ = {
+			isa = PBXGroup;
+			children = (
+				64544A471EE8D3CA00977C5E /* SmearSwift3Tests.swift */,
+				64544A491EE8D3CA00977C5E /* Info.plist */,
+			);
+			path = SmearSwift3Tests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		64544A311EE8D3CA00977C5E /* SmearSwift3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64544A4C1EE8D3CA00977C5E /* Build configuration list for PBXNativeTarget "SmearSwift3" */;
+			buildPhases = (
+				64544A2E1EE8D3CA00977C5E /* Sources */,
+				64544A2F1EE8D3CA00977C5E /* Frameworks */,
+				64544A301EE8D3CA00977C5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SmearSwift3;
+			productName = SmearSwift3;
+			productReference = 64544A321EE8D3CA00977C5E /* SmearSwift3.app */;
+			productType = "com.apple.product-type.application";
+		};
+		64544A421EE8D3CA00977C5E /* SmearSwift3Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64544A4F1EE8D3CA00977C5E /* Build configuration list for PBXNativeTarget "SmearSwift3Tests" */;
+			buildPhases = (
+				64544A3F1EE8D3CA00977C5E /* Sources */,
+				64544A401EE8D3CA00977C5E /* Frameworks */,
+				64544A411EE8D3CA00977C5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				64544A451EE8D3CA00977C5E /* PBXTargetDependency */,
+			);
+			name = SmearSwift3Tests;
+			productName = SmearSwift3Tests;
+			productReference = 64544A431EE8D3CA00977C5E /* SmearSwift3Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64544A2A1EE8D3CA00977C5E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Adam Jensen";
+				TargetAttributes = {
+					64544A311EE8D3CA00977C5E = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = BFEG4H6KA5;
+						ProvisioningStyle = Automatic;
+					};
+					64544A421EE8D3CA00977C5E = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = BFEG4H6KA5;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 64544A311EE8D3CA00977C5E;
+					};
+				};
+			};
+			buildConfigurationList = 64544A2D1EE8D3CA00977C5E /* Build configuration list for PBXProject "SmearSwift3" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 64544A291EE8D3CA00977C5E;
+			productRefGroup = 64544A331EE8D3CA00977C5E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64544A311EE8D3CA00977C5E /* SmearSwift3 */,
+				64544A421EE8D3CA00977C5E /* SmearSwift3Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		64544A301EE8D3CA00977C5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64544A3A1EE8D3CA00977C5E /* Assets.xcassets in Resources */,
+				64544A3D1EE8D3CA00977C5E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64544A411EE8D3CA00977C5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		64544A2E1EE8D3CA00977C5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64544A381EE8D3CA00977C5E /* ViewController.swift in Sources */,
+				64544A361EE8D3CA00977C5E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64544A3F1EE8D3CA00977C5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64544A481EE8D3CA00977C5E /* SmearSwift3Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		64544A451EE8D3CA00977C5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 64544A311EE8D3CA00977C5E /* SmearSwift3 */;
+			targetProxy = 64544A441EE8D3CA00977C5E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		64544A3B1EE8D3CA00977C5E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64544A3C1EE8D3CA00977C5E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		64544A4A1EE8D3CA00977C5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		64544A4B1EE8D3CA00977C5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		64544A4D1EE8D3CA00977C5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = BFEG4H6KA5;
+				INFOPLIST_FILE = SmearSwift3/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.acj.SmearSwift3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		64544A4E1EE8D3CA00977C5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = BFEG4H6KA5;
+				INFOPLIST_FILE = SmearSwift3/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.acj.SmearSwift3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		64544A501EE8D3CA00977C5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = BFEG4H6KA5;
+				INFOPLIST_FILE = SmearSwift3Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.acj.SmearSwift3Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmearSwift3.app/Contents/MacOS/SmearSwift3";
+			};
+			name = Debug;
+		};
+		64544A511EE8D3CA00977C5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = BFEG4H6KA5;
+				INFOPLIST_FILE = SmearSwift3Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.acj.SmearSwift3Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmearSwift3.app/Contents/MacOS/SmearSwift3";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		64544A2D1EE8D3CA00977C5E /* Build configuration list for PBXProject "SmearSwift3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64544A4A1EE8D3CA00977C5E /* Debug */,
+				64544A4B1EE8D3CA00977C5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64544A4C1EE8D3CA00977C5E /* Build configuration list for PBXNativeTarget "SmearSwift3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64544A4D1EE8D3CA00977C5E /* Debug */,
+				64544A4E1EE8D3CA00977C5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		64544A4F1EE8D3CA00977C5E /* Build configuration list for PBXNativeTarget "SmearSwift3Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64544A501EE8D3CA00977C5E /* Debug */,
+				64544A511EE8D3CA00977C5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 64544A2A1EE8D3CA00977C5E /* Project object */;
+}
