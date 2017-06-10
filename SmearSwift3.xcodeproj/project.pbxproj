@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		644A7C3B1EEB5B93004DC1C5 /* NALUnitParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A7C3A1EEB5B93004DC1C5 /* NALUnitParser.swift */; };
+		644A7C3E1EEB5BE0004DC1C5 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A7C3D1EEB5BE0004DC1C5 /* Data.swift */; };
+		644A7C401EEB6B20004DC1C5 /* NALUnitParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A7C3F1EEB6B20004DC1C5 /* NALUnitParserTests.swift */; };
 		64544A361EE8D3CA00977C5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64544A351EE8D3CA00977C5E /* AppDelegate.swift */; };
 		64544A381EE8D3CA00977C5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64544A371EE8D3CA00977C5E /* ViewController.swift */; };
 		64544A3A1EE8D3CA00977C5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64544A391EE8D3CA00977C5E /* Assets.xcassets */; };
 		64544A3D1EE8D3CA00977C5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64544A3B1EE8D3CA00977C5E /* Main.storyboard */; };
-		64544A481EE8D3CA00977C5E /* SmearSwift3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64544A471EE8D3CA00977C5E /* SmearSwift3Tests.swift */; };
+		64544A481EE8D3CA00977C5E /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64544A471EE8D3CA00977C5E /* DataTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		644A7C3A1EEB5B93004DC1C5 /* NALUnitParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NALUnitParser.swift; sourceTree = "<group>"; };
+		644A7C3D1EEB5BE0004DC1C5 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		644A7C3F1EEB6B20004DC1C5 /* NALUnitParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NALUnitParserTests.swift; sourceTree = "<group>"; };
 		64544A321EE8D3CA00977C5E /* SmearSwift3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmearSwift3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64544A351EE8D3CA00977C5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64544A371EE8D3CA00977C5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -32,7 +38,7 @@
 		64544A3C1EE8D3CA00977C5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		64544A3E1EE8D3CA00977C5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64544A431EE8D3CA00977C5E /* SmearSwift3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmearSwift3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		64544A471EE8D3CA00977C5E /* SmearSwift3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmearSwift3Tests.swift; sourceTree = "<group>"; };
+		64544A471EE8D3CA00977C5E /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
 		64544A491EE8D3CA00977C5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		644A7C3C1EEB5BCE004DC1C5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				644A7C3D1EEB5BE0004DC1C5 /* Data.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		64544A291EE8D3CA00977C5E = {
 			isa = PBXGroup;
 			children = (
@@ -75,11 +89,13 @@
 		64544A341EE8D3CA00977C5E /* SmearSwift3 */ = {
 			isa = PBXGroup;
 			children = (
+				644A7C3C1EEB5BCE004DC1C5 /* Extensions */,
 				64544A351EE8D3CA00977C5E /* AppDelegate.swift */,
 				64544A371EE8D3CA00977C5E /* ViewController.swift */,
 				64544A391EE8D3CA00977C5E /* Assets.xcassets */,
 				64544A3B1EE8D3CA00977C5E /* Main.storyboard */,
 				64544A3E1EE8D3CA00977C5E /* Info.plist */,
+				644A7C3A1EEB5B93004DC1C5 /* NALUnitParser.swift */,
 			);
 			path = SmearSwift3;
 			sourceTree = "<group>";
@@ -87,8 +103,9 @@
 		64544A461EE8D3CA00977C5E /* SmearSwift3Tests */ = {
 			isa = PBXGroup;
 			children = (
-				64544A471EE8D3CA00977C5E /* SmearSwift3Tests.swift */,
+				64544A471EE8D3CA00977C5E /* DataTests.swift */,
 				64544A491EE8D3CA00977C5E /* Info.plist */,
+				644A7C3F1EEB6B20004DC1C5 /* NALUnitParserTests.swift */,
 			);
 			path = SmearSwift3Tests;
 			sourceTree = "<group>";
@@ -198,7 +215,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				64544A381EE8D3CA00977C5E /* ViewController.swift in Sources */,
+				644A7C3B1EEB5B93004DC1C5 /* NALUnitParser.swift in Sources */,
 				64544A361EE8D3CA00977C5E /* AppDelegate.swift in Sources */,
+				644A7C3E1EEB5BE0004DC1C5 /* Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +225,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64544A481EE8D3CA00977C5E /* SmearSwift3Tests.swift in Sources */,
+				644A7C401EEB6B20004DC1C5 /* NALUnitParserTests.swift in Sources */,
+				64544A481EE8D3CA00977C5E /* DataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +423,7 @@
 				64544A4E1EE8D3CA00977C5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		64544A4F1EE8D3CA00977C5E /* Build configuration list for PBXNativeTarget "SmearSwift3Tests" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +432,7 @@
 				64544A511EE8D3CA00977C5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
