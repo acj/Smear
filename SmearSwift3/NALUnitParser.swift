@@ -28,84 +28,155 @@ struct NALUnitParser {
         startCodeLength = try NALUnitParser.sniffStartCodeLength(fileHandle)
     }
     
-    mutating func parse() {
+    init?() throws {
+        filePath = "n/a"
+        fileHandle = nil
+        nalUnits = [NALUnit]()
+        startCodeLength = 4
+    }
+    
+    mutating func parse() -> [NALUnit] {
         var buffer = fileHandle.readData(ofLength: CHUNK_SIZE)
         
         while buffer.count > 0 {
-            processChunk(buffer)
+            handleProcessChunkResult(processChunk(buffer))
+        
             buffer = fileHandle.readData(ofLength: CHUNK_SIZE)
         }
+        
+        if let flushedNALUnit = flush() {
+            nalUnits.append(flushedNALUnit)
+        }
+        
+        return nalUnits
+    }
+    
+    mutating func handleProcessChunkResult(_ result: (newNALUnits: [NALUnit], residueData: Data?, residueRange: Range<Int>?)) {
+        nalUnits.append(contentsOf: result.newNALUnits)
+        nalUnitResidueData = result.residueData
+        nalUnitResidueRange = result.residueRange
     }
 }
 
 extension NALUnitParser {
     static func sniffStartCodeLength(_ fileHandle: FileHandle) throws -> Int {
-        let startingPosition = fileHandle.offsetInFile
-        
-        fileHandle.seek(toFileOffset: 0)
-        let startCodeData = fileHandle.readData(ofLength: 4)
+        let sniffData = fileHandle.readData(ofLength: 1024)
         
         let startCodeLength: Int
-        if startCodeData.starts(with: Data.startCodeWithLength(3)) {
-            startCodeLength = 3
-        } else if startCodeData.starts(with: Data.startCodeWithLength(4)) {
+        if let startRange = sniffData.range(of: Data.startCodeWithLength(4)) {
             startCodeLength = 4
+            fileHandle.seek(toFileOffset: UInt64(startRange.lowerBound))
+        } else if let startRange = sniffData.range(of: Data.startCodeWithLength(3)) {
+            startCodeLength = 3
+            fileHandle.seek(toFileOffset: UInt64(startRange.lowerBound))
         } else {
             throw NSError()
         }
         
-        fileHandle.seek(toFileOffset: startingPosition)
         return startCodeLength
     }
     
-    
-    mutating func processChunk(_ chunk: Data) {
+    func processChunk(_ chunk: Data) -> ([NALUnit], Data?, Range<Int>?) {
         var newNALUnits = [NALUnit]()
+        var nalUnitResidueData: Data?
+        var nalUnitResidueRange: Range<Int>?
         let startCodeRanges = chunk.ranges(of: Data.startCodeWithLength(startCodeLength))
         
-        if let residualNALUnit = NALUnitParser.processNALUnitResidue(
+        let (residualNALUnits, remainingResidueData, remainingResidueRange) = NALUnitParser.processNALUnitResidue(
             startCodeLength: startCodeLength,
-            residueRange: nalUnitResidueRange,
-            residueData: nalUnitResidueData,
+            residueRange: self.nalUnitResidueRange,
+            residueData: self.nalUnitResidueData,
             firstStartCodeRangeInNextChunk: startCodeRanges.first,
             chunk: chunk
-        ) {
-            newNALUnits.append(residualNALUnit)
+        )
+        
+        if let residualNALUnits = residualNALUnits {
+            newNALUnits.append(contentsOf: residualNALUnits)
         }
         
-        let (wholeNALUnits, residueRange) = NALUnitParser.processWholeNALUnits(chunk: chunk, startCodeRanges: startCodeRanges)
-        newNALUnits.append(contentsOf: wholeNALUnits)
-        
-        nalUnitResidueRange = residueRange
-        if let residueRange = residueRange {
-            nalUnitResidueData = chunk.subdata(in: residueRange)
+        if let remainingResidueData = remainingResidueData, let remainingResidueRange = remainingResidueRange {
+            nalUnitResidueData = remainingResidueData
+            nalUnitResidueRange = remainingResidueRange
         } else {
-            nalUnitResidueData = nil
+            // TODO: Sort out range in overall stream vs range in current chunk
+            let (wholeNALUnits, residueRange) = NALUnitParser.processWholeNALUnits(chunk: chunk, startCodeRanges: startCodeRanges)
+            newNALUnits.append(contentsOf: wholeNALUnits)
+            
+            nalUnitResidueRange = residueRange
+            if let residueRange = residueRange {
+                nalUnitResidueData = chunk.subdata(in: residueRange)
+            } else {
+                nalUnitResidueData = nil
+            }
         }
+        
+        return (newNALUnits, nalUnitResidueData, nalUnitResidueRange)
     }
     
-    // TODO: typealias Range<Int>
-    
-    static func processNALUnitResidue(startCodeLength: Int, residueRange: Range<Int>?, residueData: Data?, firstStartCodeRangeInNextChunk: Range<Int>?, chunk: Data) -> NALUnit? {
-        if let residueRange = residueRange,
-            let residueData = residueData,
-            let firstNALUnitRangeInNextChunk = firstStartCodeRangeInNextChunk {
-            let nalUnitData = NSMutableData(data: residueData)
-            nalUnitData.append(chunk.subdata(in: firstNALUnitRangeInNextChunk))
-            
-            let nalUnitRange = Range(uncheckedBounds: (lower: residueRange.lowerBound, upper: residueRange.lowerBound + nalUnitData.length))
-            let nalUnitBytes = [UInt8](nalUnitData as Data)
-            
-            if let nalUnitType = NALUnitType(rawValue: nalUnitBytes[startCodeLength]) {
-                return NALUnit(type: nalUnitType, range: nalUnitRange)
+    func flush() -> NALUnit? {
+        if let nalUnitResidueData = nalUnitResidueData,
+           let nalUnitResidueRange = nalUnitResidueRange,
+           nalUnitResidueRange.count >= startCodeLength + 1 {
+            let nalUnitBytes = [UInt8](nalUnitResidueData as Data)
+            let packetType = nalUnitBytes[startCodeLength]
+            let nalUnitRawType = NALUnitParser.nalUnitType(fromPacketType: packetType)
+            if let nalUnitType = NALUnitType(rawValue: nalUnitRawType) {
+                return NALUnit(type: nalUnitType, range: nalUnitResidueRange)
             } else {
-                print("Failed to determine NAL unit type")
+                print("Failed to determine NAL unit type during flush")
             }
         }
         
         return nil
     }
     
+    static func processNALUnitResidue(startCodeLength: Int, residueRange: Range<Int>?, residueData: Data?, firstStartCodeRangeInNextChunk: Range<Int>?, chunk: Data) -> ([NALUnit]?, Data?, Range<Int>?) {
+        guard
+            let residueData = residueData,
+            let residueRange = residueRange
+        else {
+            return (nil, nil, nil)
+        }
+        
+        let unprocessedData = NSMutableData(data: residueData)
+        
+        if let firstStartCodeRangeInNextChunk = firstStartCodeRangeInNextChunk {
+            let rangeForRemainderOfResidualNALUnit = Range<Int>(uncheckedBounds: (0, firstStartCodeRangeInNextChunk.lowerBound))
+            unprocessedData.append(chunk.subdata(in: rangeForRemainderOfResidualNALUnit))
+            
+            let startCodeRanges = (unprocessedData as Data).ranges(of: Data.startCodeWithLength(startCodeLength))
+            let (wholeNALUnits, residueRange) = processWholeNALUnits(chunk: unprocessedData as Data, startCodeRanges: startCodeRanges)
+            
+            if let residueRange = residueRange {
+                let nalUnitRange = Range(uncheckedBounds: (residueRange.lowerBound, residueRange.lowerBound + unprocessedData.length))
+                let nalUnitBytes = [UInt8](unprocessedData as Data)
+                
+                let packetType = nalUnitBytes[startCodeLength]
+                let nalUnitRawType = nalUnitType(fromPacketType: packetType)
+                
+                if let nalUnitType = NALUnitType(rawValue: nalUnitRawType) {
+//                    print("Saw NALU of type \(nalUnitType)")
+                    let residualNALUnit = NALUnit(type: nalUnitType, range: nalUnitRange)
+                    var nalUnits = [NALUnit](wholeNALUnits)
+                    nalUnits.append(residualNALUnit)
+                    return (nalUnits, nil, nil)
+                } else {
+                    print("Failed to determine NAL unit type")
+                }
+            } else {
+                // TODO
+                print("What now?")
+                assert(false)
+            }
+        } else {
+            unprocessedData.append(chunk)
+            let unprocessedRange = Range<Int>(uncheckedBounds: (residueRange.lowerBound, residueRange.count + chunk.count))
+            return (nil, unprocessedData as Data, unprocessedRange)
+        }
+    
+        return (nil, nil, nil)
+    }
+
     static func processWholeNALUnits(chunk: Data, startCodeRanges: [Range<Int>]) -> ([NALUnit], Range<Int>?) {
         var wholeNALUnits = [NALUnit]()
         var residueRange: Range<Int>?
@@ -119,10 +190,12 @@ extension NALUnitParser {
                 } else {
                     let nextRange = startCodeRanges[index + 1]
                     let nalUnitRange = Range<Int>(uncheckedBounds: (currentRange.lowerBound, nextRange.lowerBound))
-                    let nalUnitRawType = chunk.withUnsafeBytes { ptr -> UInt8 in
-                        return ptr[nalUnitRange.lowerBound + 4]
+                    let packetType = chunk.withUnsafeBytes { ptr -> UInt8 in
+                        return ptr[nalUnitRange.lowerBound + currentRange.count]
                     }
+                    let nalUnitRawType = nalUnitType(fromPacketType: packetType)
                     if let nalUnitType = NALUnitType(rawValue: nalUnitRawType) {
+//                        print("Saw NALU of type \(nalUnitType)")
                         let nalUnit = NALUnit(type: nalUnitType, range: nalUnitRange)
                         wholeNALUnits.append(nalUnit)
                     } else {
@@ -135,6 +208,10 @@ extension NALUnitParser {
         }
         
         return (wholeNALUnits, residueRange)
+    }
+    
+    static func nalUnitType(fromPacketType packetType: UInt8) -> UInt8 {
+        return packetType & 0b00011111
     }
 }
 
@@ -179,24 +256,6 @@ enum NALUnitType: UInt8 {
 }
 
 extension Data {
-    func rangesOfNALUnits(startCodeLength: Int) -> [Range<Int>] {
-        var ranges = [Range<Int>]()
-        var nextStartCodeOffset: Int?
-        let startCode = Data.startCodeWithLength(startCodeLength)
-        
-        nextStartCodeOffset = range(of: startCode)?.lowerBound
-        
-        while let offset = nextStartCodeOffset,
-            let currentRange = range(of: startCode, options: Data.SearchOptions(), in: Range(uncheckedBounds: (lower: offset, upper: self.count - 1))) {
-                ranges.append(Range<Int>(uncheckedBounds: (currentRange.lowerBound, currentRange.lowerBound + startCodeLength)))
-                
-                let nextRange = Range<Int>(uncheckedBounds: (currentRange.lowerBound + startCodeLength, currentRange.upperBound))
-                nextStartCodeOffset = range(of: startCode, options: Data.SearchOptions(), in: nextRange)?.lowerBound
-        }
-        
-        return ranges
-    }
-    
     static func startCodeWithLength(_ length: Int) -> Data {
         var startCode = Array<UInt8>(repeating: 0, count: length)
         startCode[length - 1] = 1

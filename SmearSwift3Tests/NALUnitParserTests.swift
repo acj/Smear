@@ -10,18 +10,22 @@ import XCTest
 @testable import SmearSwift3
 
 class NALUnitParserTests: XCTestCase {
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
     
     // MARK: processNALUnitResidue
+    
+    func testWhenNoNALUnitResidueIsPresent_thenDoesNotReturnNALUnit() {
+        let (residualNALUnits, remainingResidueData, remainingResidueRange) = NALUnitParser.processNALUnitResidue(
+            startCodeLength: 4,
+            residueRange: nil,
+            residueData: nil,
+            firstStartCodeRangeInNextChunk: nil,
+            chunk: Data()
+        )
+        
+        XCTAssertNil(residualNALUnits)
+        XCTAssertNil(remainingResidueData)
+        XCTAssertNil(remainingResidueRange)
+    }
 
     func testWhenNALUnitResidueIsPresent_thenReturnsAssembledNALUnit() {
         let nalUnitType = NALUnitType.PictureParameterSet
@@ -29,9 +33,9 @@ class NALUnitParserTests: XCTestCase {
         let haystack = Data(bytes: [9, 9, 9, 0, 0, 0, 1, 8, 8, 8])
         let residueRange = Range(uncheckedBounds: (0, 7))
         let residueData = previousChunk.subdata(in: residueRange)
-        let firstStartCodeRangeInNextChunk = Range(uncheckedBounds: (0, 3))
+        let firstStartCodeRangeInNextChunk = Range(uncheckedBounds: (3, 7))
         
-        let residualNALUnit = NALUnitParser.processNALUnitResidue(
+        let (residualNALUnits, remainingResidueData, remainingResidueRange) = NALUnitParser.processNALUnitResidue(
             startCodeLength: 4,
             residueRange: residueRange,
             residueData: residueData,
@@ -39,16 +43,18 @@ class NALUnitParserTests: XCTestCase {
             chunk: haystack
         )
         
-        XCTAssertNotNil(residualNALUnit)
-        XCTAssertEqual(residualNALUnit!.range, Range(uncheckedBounds: (0, 10)))
-        XCTAssertEqual(residualNALUnit!.type, nalUnitType)
+        XCTAssertEqual(residualNALUnits!.count, 1)
+        XCTAssertEqual(residualNALUnits!.first!.range, Range(uncheckedBounds: (0, 10)))
+        XCTAssertEqual(residualNALUnits!.first!.type, nalUnitType)
+        XCTAssertNil(remainingResidueData)
+        XCTAssertNil(remainingResidueRange)
     }
 
     func testWhenNALUnitResidueIsAbsent_thenDoesNotReturnNALUnit() {
         let haystack = Data(bytes: [0, 0, 0, 1, 8, 8, 8])
         let firstStartCodeRangeInNextChunk = Range(uncheckedBounds: (0, 3))
         
-        let residualNALUnit = NALUnitParser.processNALUnitResidue(
+        let (residualNALUnits, remainingResidueData, remainingResidueRange) = NALUnitParser.processNALUnitResidue(
             startCodeLength: 4,
             residueRange: nil,
             residueData: nil,
@@ -56,7 +62,9 @@ class NALUnitParserTests: XCTestCase {
             chunk: haystack
         )
         
-        XCTAssertNil(residualNALUnit)
+        XCTAssertNil(residualNALUnits)
+        XCTAssertNil(remainingResidueData)
+        XCTAssertNil(remainingResidueRange)
     }
     
     // MARK: processWholeNALUnits
@@ -116,5 +124,21 @@ class NALUnitParserTests: XCTestCase {
         XCTAssertEqual(residueRange, Range<Int>(uncheckedBounds: (15, haystack.count)))
     }
     
-    // TODO: Test when we're splitting the start code across buffer boundaries
+    func testWhenNALUnitStartCodeIsSplitAcrossChunkBoundaries_thenReturnsCompleteNALUnit() throws {
+        let nalUnitType = NALUnitType.EndOfSequence
+        let haystack1 = Data(bytes: [0, 0])
+        let haystack2 = Data(bytes: [0, 1, nalUnitType.rawValue])
+        
+        var naluParser = try NALUnitParser()!
+        naluParser.handleProcessChunkResult(naluParser.processChunk(haystack1))
+        naluParser.handleProcessChunkResult(naluParser.processChunk(haystack2))
+        
+        XCTAssertEqual(naluParser.nalUnits.count, 0)
+        
+        let nalUnit = naluParser.flush()
+        
+        XCTAssertNotNil(nalUnit)
+        XCTAssertEqual(nalUnit!.type, nalUnitType)
+        XCTAssertEqual(nalUnit!.range, Range<Int>(uncheckedBounds: (0, 5)))
+    }
 }

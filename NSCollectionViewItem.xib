@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <collectionViewItem nibName="NSCollectionViewItem" id="UKg-Es-0IM">
+            <connections>
+                <outlet property="imageView" destination="rkr-Cc-Rf7" id="CR7-NQ-AFo"/>
+                <outlet property="view" destination="QEs-8b-GZr" id="bsl-Nj-Ybg"/>
+            </connections>
+        </collectionViewItem>
+        <customView id="QEs-8b-GZr">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rkr-Cc-Rf7">
+                    <rect key="frame" x="4" y="4" width="142" height="142"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="rWz-qo-PA8"/>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="rkr-Cc-Rf7" firstAttribute="leading" secondItem="QEs-8b-GZr" secondAttribute="leading" constant="4" id="5sk-tj-qa5"/>
+                <constraint firstItem="rkr-Cc-Rf7" firstAttribute="top" secondItem="QEs-8b-GZr" secondAttribute="top" constant="4" id="Ahh-u4-Tgf"/>
+                <constraint firstAttribute="trailing" secondItem="rkr-Cc-Rf7" secondAttribute="trailing" constant="4" id="HVe-58-cOL"/>
+                <constraint firstAttribute="bottom" secondItem="rkr-Cc-Rf7" secondAttribute="bottom" constant="4" id="VeI-7Q-rlq"/>
+            </constraints>
+            <point key="canvasLocation" x="-177.5" y="104"/>
+        </customView>
+    </objects>
+</document>
